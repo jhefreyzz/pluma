@@ -4,20 +4,24 @@ defmodule Pluma.Accounts.User do
 
 
   schema "users" do
+    field :uid, :string
     field :avatar_url, :string
     field :email_address, :string
-    field :first_name, :string
-    field :last_name, :string
+    field :name, :string
     field :provider, :string
     field :token, :string
 
     timestamps()
   end
 
+  @required_fields ~w(uid name email_address token provider)a
+  @optional_fields ~w(avatar_url)a
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:first_name, :last_name, :email_address, :avatar_url, :token, :provider])
-    |> validate_required([:first_name, :last_name, :email_address, :avatar_url, :token, :provider])
+    |> cast(attrs, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
+    |> unique_constraint(:credentials, name: :users_email_address_provider_index)
   end
+
 end

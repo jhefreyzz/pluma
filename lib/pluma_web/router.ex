@@ -19,6 +19,14 @@ defmodule PlumaWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/auth", PlumaWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    delete "/sign_out", AuthController, :delete
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", PlumaWeb do
   #   pipe_through :api
