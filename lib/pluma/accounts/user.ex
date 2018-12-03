@@ -4,17 +4,17 @@ defmodule Pluma.Accounts.User do
 
 
   schema "users" do
-    field :uid, :string
     field :avatar_url, :string
     field :email_address, :string
     field :name, :string
     field :provider, :string
     field :token, :string
 
+    has_many :posts, Pluma.Blog.Post
     timestamps()
   end
 
-  @required_fields ~w(uid name email_address token provider)a
+  @required_fields ~w(name email_address token provider)a
   @optional_fields ~w(avatar_url)a
   @doc false
   def changeset(user, attrs) do

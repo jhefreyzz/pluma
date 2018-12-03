@@ -36,7 +36,7 @@ defmodule Pluma.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
-  def get_user_by_uid(%{uid: uid}), do: Repo.get_by(User, uid: uid)
+  def get_user_by_email_and_provider(params), do: Repo.get_by(User, %{email_address: params.email_address, provider: params.provider})
   @doc """
   Creates a user.
 

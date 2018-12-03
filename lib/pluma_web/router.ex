@@ -7,6 +7,7 @@ defmodule PlumaWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug PlumaWeb.Plug.AssignCurrentUser
   end
 
   pipeline :api do
@@ -17,6 +18,7 @@ defmodule PlumaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    resources "/posts", PostController
   end
 
   scope "/auth", PlumaWeb do

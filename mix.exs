@@ -48,7 +48,8 @@ defmodule Pluma.MixProject do
       {:ueberauth, "~> 0.5.0"},
       {:ueberauth_github, "~> 0.7.0"},
       {:ueberauth_google, "~> 0.7.0"},
-      {:slugger, "~> 0.3"}
+      {:slugger, "~> 0.3"},
+      {:timex, "~> 3.1"}
     ]
   end
 

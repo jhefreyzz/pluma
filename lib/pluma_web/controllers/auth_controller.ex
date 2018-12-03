@@ -20,14 +20,20 @@ defmodule PlumaWeb.AuthController do
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     user_params = user_params(auth, conn.path_params["provider"])
-
-    case Accounts.get_user_by_uid(user_params) do
+    IO.inspect user_params
+    case Accounts.get_user_by_email_and_provider(user_params) do
       nil ->
-        user = Accounts.create_user(user_params)
-        conn
-        |> put_flash(:info, "Successfully authenticated")
-        |> put_session(:current_user, user)
-        |> redirect(to: "/")
+        case Accounts.create_user(user_params) do
+        {:ok, user} ->
+          conn
+            |> put_flash(:info, "Successfully authenticated")
+            |> put_session(:current_user, user)
+            |> redirect(to: "/")
+       {:error, reason} ->
+          conn
+            |> put_flash(:error, reason)
+            |> redirect(to: "/")
+       end
       user ->
          conn
          |> put_flash(:info, "Successfully authenticated")
@@ -37,7 +43,7 @@ defmodule PlumaWeb.AuthController do
   end
 
   defp user_params(auth, provider) do
-    %{uid: auth.uid, name: get_name_from_auth(auth),
+    %{name: get_name_from_auth(auth),
       email_address: auth.info.email, avatar_url: get_avatar_from_auth(auth),
       token: auth.credentials.token, provider: provider }
   end
