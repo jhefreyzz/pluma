@@ -26,5 +26,6 @@
 <% end %>
   </tbody>
 </table>
+<%= pagination_links @posts %>
 
 <span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>

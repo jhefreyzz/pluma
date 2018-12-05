@@ -49,7 +49,8 @@ defmodule Pluma.MixProject do
       {:ueberauth_github, "~> 0.7.0"},
       {:ueberauth_google, "~> 0.7.0"},
       {:slugger, "~> 0.3"},
-      {:timex, "~> 3.1"}
+      {:scrivener_ecto, "~> 2.0"},
+      {:scrivener_html, git: "https://github.com/hlongvu/scrivener_html.git"}
     ]
   end
 

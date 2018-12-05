@@ -4,8 +4,8 @@ defmodule PlumaWeb.PostController do
   alias Pluma.Blog
   alias Pluma.Blog.Post
 
-  def index(conn, _params) do
-    posts = Blog.list_posts()
+  def index(conn, params) do
+    posts = Blog.list_posts(params)
     render(conn, "index.html", posts: posts)
   end
 

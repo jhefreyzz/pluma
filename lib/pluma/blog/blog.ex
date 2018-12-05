@@ -16,8 +16,13 @@ defmodule Pluma.Blog do
       [%Post{}, ...]
 
   """
-  def list_posts do
-    Repo.all(Post) |> Repo.preload(:user) |> Repo.preload(:tags)
+  def list_posts(params) do
+    # query = from(p in Post, order_by: [desc: p.inserted_at, asc: p.id], preload: [:user, :tags])
+    # Repo.paginate(query, cursor_fields: [:inserted_at, :id], limit: 20)
+    Post
+    |> preload(:user)
+    |> preload(:tags)
+    |> Repo.paginate(params)
   end
 
   @doc """
