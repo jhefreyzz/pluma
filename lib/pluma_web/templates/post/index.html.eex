@@ -13,11 +13,15 @@
       <td><%= post.title %></td>
       <td><%= post.content %></td>
       <td><%= post.inserted_at %></td>
+      <td><%= for tag <- post.tags do %>
+        <span><%= tag.name %></span>
+        <% end %>
       <td>
         <%= link "Show", to: Routes.post_path(@conn, :show, post) %>
         <%= link "Edit", to: Routes.post_path(@conn, :edit, post) %>
         <%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %>
       </td>
+      <td>Views: <%= post.views %></td>
     </tr>
 <% end %>
   </tbody>

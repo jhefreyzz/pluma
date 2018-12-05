@@ -10,6 +10,7 @@ defmodule Pluma.Blog.Post do
     field :title, :string
     field :views, :integer
     belongs_to :user, Pluma.Accounts.User, on_replace: :update
+    many_to_many :tags, Pluma.Blog.Tag, join_through: Pluma.Blog.PostTag, on_replace: :delete
 
     timestamps()
   end

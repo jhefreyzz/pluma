@@ -17,7 +17,7 @@ defmodule PlumaWeb.PostController do
 
   def create(conn, %{"post" => post_params}) do
     current_user = get_session(conn, :current_user)
-    post_params = Map.merge(%{"user" => current_user}, post_params)
+    post_params = Map.merge(%{"user" => current_user, "tags" => "erlang,elixir"}, post_params)
     case Blog.create_post(post_params) do
       {:ok, post} ->
         conn
@@ -46,7 +46,8 @@ defmodule PlumaWeb.PostController do
   def update(conn, %{"id" => id, "post" => post_params}) do
     post = Blog.get_post!(id)
     current_user = get_session(conn, :current_user)
-    post_params = Map.merge(%{"user" => current_user}, post_params)
+    post_params = Map.merge(%{"user" => current_user, "tags" => "docker, javascript" }, post_params)
+
     case Blog.update_post(post, post_params) do
       {:ok, post} ->
         conn
