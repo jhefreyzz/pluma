@@ -2,7 +2,7 @@ defmodule PlumaWeb.PostController do
   use PlumaWeb, :controller
 
   alias Pluma.Blog
-  alias Pluma.Blog.{Post, Comment}
+  alias Pluma.Blog.Post
 
   def index(conn, params) do
     posts = Blog.list_posts(params)
@@ -33,11 +33,7 @@ defmodule PlumaWeb.PostController do
 
     post = Blog.get_post!(id)
            Blog.increment(post)
-
-    comments = Blog.list_comments(id)
-    IO.inspect comments
-    comment_changeset = Blog.change_comment(%Comment{})
-    render(conn, "show.html", post: post, comment_changeset: comment_changeset, comments: comments)
+    render(conn, "show.html", post: post)
   end
 
   def edit(conn, %{"id" => id}) do
