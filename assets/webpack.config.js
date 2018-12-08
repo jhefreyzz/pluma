@@ -12,7 +12,6 @@ module.exports = (env, options) => ({
       new OptimizeCSSAssetsPlugin({})
     ]
   },
-
   entry: {
     './js/app.js': ['./js/app.js'].concat(glob.sync('./vendor/**/*.js'))
   },
