@@ -11,6 +11,7 @@ defmodule Pluma.Accounts.User do
     field :token, :string
 
     has_many :posts, Pluma.Blog.Post
+    has_many :comments, Pluma.Blog.Comment
     timestamps()
   end
 

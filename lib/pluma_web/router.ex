@@ -19,6 +19,7 @@ defmodule PlumaWeb.Router do
 
     get "/", PageController, :index
     resources "/posts", PostController
+    resources "/comments", CommentController
   end
 
   scope "/auth", PlumaWeb do

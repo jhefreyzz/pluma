@@ -11,7 +11,7 @@ defmodule Pluma.Blog.Tag do
   end
 
   @doc false
-  def changeset(tag, attrs) do
+  def changeset(tag, attrs \\ %{}) do
     tag
     |> cast(attrs, [:name])
     |> validate_required([:name])

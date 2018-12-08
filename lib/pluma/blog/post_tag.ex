@@ -13,7 +13,7 @@ defmodule Pluma.Blog.PostTag do
   @doc false
   def changeset(post_tag, attrs) do
     post_tag
-    |> cast(attrs, [:post_id, :tag_id])
+    |> cast(attrs, [])
     |> validate_required([])
   end
 end

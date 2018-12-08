@@ -1,5 +1,7 @@
 <h1>Listing Posts</h1>
 <%= @current_user.name %>
+
+<%= link("delete", to: "/auth/sign_out", method: :delete) %>
 <table>
   <thead>
     <tr>
