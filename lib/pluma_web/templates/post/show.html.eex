@@ -2,7 +2,31 @@
 
 <ul>
 <%= @post.title %>
+<small>Armasu: ?</small>
+<img src="<%= Pluma.HeaderImage.generate_url(@post) %>"/ >
 </ul>
+
+<h1>Comments</h1>
+<div style="border: 4px solid red">
+    
+    <ul>
+      <%= for comment <- @comments do %>
+       <li>Posted by: <%=comment.user.name %> <br><%= comment.comment %></li> 
+      <% end %>
+    </ul>
+
+       
+</div>
+
+<%= form_for @comment_changeset, Routes.comment_path(@conn, :create), fn f -> %>
+    <%= textarea f, :comment %>
+
+    <%= hidden_input :comment, :user_id, value: @current_user.id %>
+    <%= hidden_input :comment, :post_id, value: @post.id %>
+     <div>
+    <%= submit "Save" %>
+      </div>
+<% end %>
 
 <span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
 <span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
